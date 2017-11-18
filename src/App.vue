@@ -31,12 +31,14 @@ export default {
       let hasIt = false;
       this.cartItems.map(item => {
         if (item.name === singleItem.name) {
-          item.num++;
+//          alert("App.vue: " + singleItem.num)
+          item.num = parseInt(item.num) + parseInt(singleItem.num);
           hasIt = true;
         }
       });
       if (!hasIt) {
-        this.cartItems.push(singleItem);
+          this.cartItems.push(JSON.parse(JSON.stringify(singleItem)));
+//          this.cartItems.push(singleItem);
       }
     }
   },
@@ -47,9 +49,5 @@ export default {
 }
 </script>
 
-<style>
-#app {
-
-}
-
+<style type="text/css" resource="/src/assets/style/bootstrap.css">
 </style>
