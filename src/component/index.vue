@@ -52,6 +52,16 @@
             return {
                 items: [
                     {
+                        name: '罪与罚',
+                        price: '18.10',
+                        description: '一部浸透着血和泪的社会悲剧，一部酣畅淋漓地剖析一个罪犯内心世界的心理小说，一部举世公认的、震撼灵魂的世界文学名著。',
+                        author: '【俄】费奥多尔·陀思妥耶夫斯基',
+                        date: '2003',
+                        pic: '/src/assets/zyf.jpg',
+                        num: 0,
+                        isSelected: true
+                    },
+                    {
                         name: 'C++ Primer Plus(第6版)',
                         price: '99.00',
                         description: '经典C++教程十年新版再现，众多C++高手和读者好评如潮',
@@ -110,17 +120,7 @@
                         pic: '/src/assets/qt.jpg',
                         num: 0,
                         isSelected: true
-                    },
-                    {
-                        name: 'The Great Gatsby',
-                        price: '32.00',
-                        description: '看一颗赤子之心，在镀金时代的浮华与虚无里，如何璀璨，又如何幻灭',
-                        author: "F. Scott Fitzgerald",
-                        data: '2013',
-                        pic: '/src/assets/tgg.jpg',
-                        num: 0,
-                        isSelected: true
-                    },
+                    }
                 ]
             }
         },

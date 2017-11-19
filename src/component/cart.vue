@@ -56,7 +56,7 @@
                     <!--<div class="td-num">{{ item.num }}</div>-->
                 </div>
                 <div class="col-sm-2">
-                    <p class="form-control-static">{{ item.num * item.price }}</p>
+                    <p class="form-control-static">{{ (item.num * item.price).toFixed(2) }}</p>
                 </div>
                 <div class="col-sm-2">
                     <a href="javascript:;" class="btn btn-warning btn-sm " @click="deleteOneProduct(index)"
@@ -73,10 +73,10 @@
                         <a class="btn btn-danger btn-sm" href="javascript:;" @click="deleteProducts()" role="button">删除所选商品</a>
                     </div>
                     <div class="col-md-6 col-md-offset-1">
-                        <p class="form-control-static"><span class="total-num">{{ getTotal.totalNum }}</span>&nbsp;&nbsp;&nbsp;种商品总计（不含运费）：￥&nbsp;<span class="lead total-price">{{ getTotal.totalPrice }}</span></p>
+                        <p class="form-control-static"><span class="total-num">{{ getTotal.totalNum }}</span>&nbsp;&nbsp;&nbsp;种商品总计（不含运费）：<span class="lead total-price">￥&nbsp;{{ getTotal.totalPrice }}</span></p>
                     </div>
                     <div class="col-md-2">
-                        <a class="btn btn-success" href="javascript:;" role="button">去结算</a>
+                        <a class="btn btn-success" href="javascript:;" role="button" @click="purchase">去结算</a>
                     </div>
                 </div>
             </div>
@@ -155,6 +155,10 @@
                 //根据索引删除productList的记录
                 this.bookList.splice(index, 1);
             },
+            // 付款
+            purchase: function () {
+                alert("共需付款 " + this.getTotal.totalPrice + " 元");
+            },
             // 显示或隐藏
             min_max: function () {
                 if (this.p_show) {
@@ -197,7 +201,7 @@
 
     .cart-product {
         width: 100%;
-        height: 60%;
+        height: 65%;
         overflow: scroll;
     }
 
