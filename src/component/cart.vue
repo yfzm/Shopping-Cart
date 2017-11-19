@@ -1,6 +1,6 @@
 <template>
-    <div class="page-shopping-cart" id="shopping-cart" title="点我显示/隐藏购物车" v-bind:style="{ height: d_height, top: d_top}">
-        <div @click="min_max">
+    <div class="page-shopping-cart" id="shopping-cart" v-bind:style="{ height: d_height, top: d_top}">
+        <div @click="min_max" id="cart-navbar" title="点我显示/隐藏购物车">
             <nav class="navbar navbar-default">
                 <div class="container-fluid"></div>
                 <div class="navbar-brand"><img class="pull-left" src="../assets/cart.png" alt="" width="20" height="20">&nbsp;&nbsp;购物车
@@ -34,7 +34,7 @@
         </div>
         <div v-if="p_show" class="cart-product">
             <div class="cart-item container-fluid" v-for="(item, index) in bookList">
-                <div class="row" v-bind:style="{ 'background-color': (index === d_index) ? '#ebebeb' : '#f8f8f8' }" v-on:mouseover="chosen(index)" v-on:mouseleave="quit">
+                <div class="row item-row" v-bind:style="{ 'background-color': (index === d_index) ? '#ebebeb' : '#f8f8f8' }" v-on:mouseover="chosen(index)" v-on:mouseleave="quit">
                     <div class="col-sm-2">
                         <div class="checkbox">
                             <label for="check_item">
@@ -95,7 +95,7 @@
                 d_height: "60%",
                 d_top: "40%",
                 d_icon_path: '/src/assets/down.png',
-                d_index: {},
+                d_index: undefined,
                 bg_color: '#f8f8f8'
 //        bookList: [
 //          {

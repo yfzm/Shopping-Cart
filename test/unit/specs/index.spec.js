@@ -1,6 +1,6 @@
-// import Vue from 'vue'
-// import HelloWorld from '@/components/index'
-//
-// describe('index.vue', () => {
-//
-// });
+import Vue from 'vue'
+import index from '@/component/index'
+
+describe('index.vue', () => {
+    
+});
