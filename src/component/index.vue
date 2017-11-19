@@ -18,7 +18,7 @@
         </div>
 
         <!--body-->
-        <div class="text-center">
+        <div>
             <s-item v-for="item in items" v-bind:single-item="item" v-on:addItem="addToCart"></s-item>
         </div>
 
@@ -121,7 +121,7 @@
 
 <style>
     #index {
-        text-align: center;
+        /*text-align: center;*/
     }
 
     body {
