@@ -1,5 +1,5 @@
 <template>
-    <div class="page-shopping-cart" id="shopping-cart" v-bind:style="{ height: d_height, top: d_top}">
+    <div class="page-shopping-cart" id="shopping-cart" title="点我显示/隐藏购物车" v-bind:style="{ height: d_height, top: d_top}">
         <div @click="min_max">
             <nav class="navbar navbar-default">
                 <div class="container-fluid"></div>
@@ -34,34 +34,37 @@
                 </div>
             </div>
         </div>
-        <div v-if="p_show" class="cart-product container-fluid">
-            <div class="row cart-item" v-for="(item, index) in bookList" v-bind:style="{'background-color': bg_color}" v-on:mouseover="chosen" v-on:mouseleave="quit">
-                <div class="col-sm-2">
-                    <div class="checkbox">
-                        <label for="check_item">
-                            <input type="checkbox" id="check_item" v-model="item.isSelected">
-                            <a class="td-product"><img :src="item.pic" width="50" height="50"></a>
-                        </label>
+        <div v-if="p_show" class="cart-product">
+            <div class="cart-item container-fluid" v-for="(item, index) in bookList">
+                <div class="row" v-bind:style="{ 'background-color': (index === d_index) ? '#ebebeb' : '#f8f8f8' }" v-on:mouseover="chosen(index)" v-on:mouseleave="quit">
+                    <div class="col-sm-2">
+                        <div class="checkbox">
+                            <label for="check_item">
+                                <input type="checkbox" id="check_item" v-model="item.isSelected">
+                                <a class="td-product"><img :src="item.pic" width="50" height="50"></a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="form-control-static">{{ item.name }}</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="form-control-static">{{ item.price }}</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="num"><input id="num" class="form-control input-sm" type="number" title="num"
+                                                v-model="item.num"></label>
+                        <!--<div class="td-num">{{ item.num }}</div>-->
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="form-control-static">{{ (item.num * item.price).toFixed(2) }}</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="javascript:;" class="btn btn-warning btn-sm " @click="deleteOneProduct(index)"
+                           role='button'>删除</a>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <p class="form-control-static">{{ item.name }}</p>
-                </div>
-                <div class="col-sm-2">
-                    <p class="form-control-static">{{ item.price }}</p>
-                </div>
-                <div class="col-sm-2">
-                    <label for="num"><input id="num" class="form-control input-sm" type="number" title="num"
-                                            v-model="item.num"></label>
-                    <!--<div class="td-num">{{ item.num }}</div>-->
-                </div>
-                <div class="col-sm-2">
-                    <p class="form-control-static">{{ (item.num * item.price).toFixed(2) }}</p>
-                </div>
-                <div class="col-sm-2">
-                    <a href="javascript:;" class="btn btn-warning btn-sm " @click="deleteOneProduct(index)"
-                       role='button'>删除</a>
-                </div>
+
                 <!--<div class="cart-spacing"></div>-->
             </div>
 
@@ -93,6 +96,7 @@
                 d_height: "60%",
                 d_top: "40%",
                 d_icon_path: '/src/assets/down.png',
+                d_index: {},
                 bg_color: '#f8f8f8'
 //        bookList: [
 //          {
@@ -160,11 +164,11 @@
             purchase: function () {
                 alert("共需付款 " + this.getTotal.totalPrice + " 元");
             },
-            chosen() {
-                this.bg_color = "#ebebeb";
+            chosen(index) {
+                this.d_index = index;
             },
             quit() {
-                this.bg_color = "#f8f8f8";
+                this.d_index = undefined;
             },
             // 显示或隐藏
             min_max: function () {
