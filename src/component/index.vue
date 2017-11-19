@@ -20,7 +20,6 @@
         <!--body-->
         <div class="text-center">
             <s-item v-for="item in items" v-bind:single-item="item" v-on:addItem="addToCart"></s-item>
-            <!--<s-item v-for="item in items" v-bind:single-item="item" v-on:convert="convertCad"></s-item>-->
         </div>
 
     </div>

@@ -23,11 +23,10 @@
 
                 <div class="form-inline">
                     <input type="number" class="form-control input-sm item-num" v-model="itemNum" title="购买数量">
-                    <a class="btn btn-default btn-sm item-button" @click="addToCart"><i class="icon-shopping-cart"></i> 加入购物车</a>
+                    <a class="btn btn-default btn-sm item-button" @click="addToCart"><img src="../assets/cart_mini.png" alt=""> 加入购物车</a>
                 </div>
 
             </div>
-            <!--<div class="clearfix"></div>-->
         </div>
         <div class="spacing"></div>
     </div>
