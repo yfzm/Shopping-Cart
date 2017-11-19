@@ -3,7 +3,7 @@
         <div class="row" v-bind:style="{'background-color': this.bg_color}" v-on:mouseover="chosen"
              v-on:mouseleave="quit">
             <div class="col-md-2">
-                <a class="pull-left" href="javascript:;"><img :src="singleItem.pic" alt="" width="150" height="150"></a>
+                <a class="pull-left" href="javascript:;"><img :src="singleItem.pic" alt="" width="120" height="120"></a>
             </div>
             <div class="col-md-2">
                 <div>
@@ -17,18 +17,16 @@
                 <p class="item-description">{{ singleItem.description }}</p>
             </div>
             <div class="col-md-1">
-                <p class="item-price">{{ singleItem.price }}</p>
+                <p class="item-price">￥{{ singleItem.price }}</p>
             </div>
             <div class="col-md-4">
 
                 <div class="form-inline">
                     <input type="number" class="form-control input-sm item-num" v-model="itemNum" title="购买数量">
-                    <!--<input type="number" class="span80" value="1" title="购买数量">-->
-                    <a class="btn btn-default btn-sm item-button" @click="addToCart"><i class="icon-shopping-cart"></i> 加入购物车</a>
+                    <a class="btn btn-default btn-sm item-button" @click="addToCart"><img src="../assets/cart_mini.png" alt=""> 加入购物车</a>
                 </div>
 
             </div>
-            <!--<div class="clearfix"></div>-->
         </div>
         <div class="spacing"></div>
     </div>
@@ -44,11 +42,7 @@
             }
         },
         methods: {
-//            convertCad() {
-//                this.$emit('convert', this.singleItem)
-//            },
             addToCart() {
-//                this.singleItem.num = parseInt(this.itemNum);
                 this.$emit('addItem', this.singleItem, this.itemNum);
             },
             chosen() {
@@ -64,17 +58,22 @@
 <style type="text/css" src="../assets/style/bootstrap.css"></style>
 
 <style>
-    .span80 {
-        width: 80px
-    }
 
     .spacing {
         margin-top: 30px;
     }
 
-    .hei150 {
-        height: 150px;
-        vertical-align: center;
+    .item-price {
+        color: #ff4500;
+        font-size: 15px;
+    }
+
+    .item-author, .item-date {
+        color: #808080
+    }
+
+    .item-description {
+        color: #606060
     }
 
 </style>

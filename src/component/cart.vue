@@ -97,18 +97,6 @@
                 d_icon_path: '/src/assets/down.png',
                 d_index: undefined,
                 bg_color: '#f8f8f8'
-//        bookList: [
-//          {
-//            name: 'C++ Primer Plus(第6版)',
-//            price: '99.00',
-//            description: '经典C++教程十年新版再现，众多C++高手和读者好评如潮',
-//            author: 'Stephen Prata',
-//            date: '2016',
-//            pic: '',
-//            num: 1,
-//            isSelected: true
-//          }
-//        ]
             }
         },
         computed: {
@@ -195,16 +183,11 @@
         right: 0;
         overflow: hidden;
         z-index: 99;
-        /*border: 1px solid #c00;*/
-        /*background: #ebebeb;*/
-        /*background: #F9EFFC;*/
         background: #f8f8f8;
         width: 40%;
-        /*height: 50%;*/
         font-size: 12px;
         margin: 0;
         display: block;
-        /*top: 50%;*/
         visibility: visible;
         opacity: 1;
     }
@@ -232,7 +215,7 @@
     }
 
     .total-num {
-        font: italic 13px 'impact';
+        font: italic 13px 'arial';
     }
 
 </style>
