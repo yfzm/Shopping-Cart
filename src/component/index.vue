@@ -1,135 +1,140 @@
 <template>
-  <div id="index">
-    <!--head-->
-    <div class="list-head">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-brand navbar-left">书城</div>
-          <div class="navbar-text navbar-center">在这里找到好书</div>
-          <form class="navbar-form navbar-right form-horizontal" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">搜索</button>
-          </form>
+    <div id="index">
+        <!--head-->
+        <div class="list-head">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-brand navbar-left">书城</div>
+                    <div class="navbar-text navbar-center">在这里找到好书</div>
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                </div>
+            </nav>
+
         </div>
-      </nav>
+
+        <!--body-->
+        <div class="text-center">
+            <s-item v-for="item in items" v-bind:single-item="item" v-on:addItem="addToCart"></s-item>
+            <!--<s-item v-for="item in items" v-bind:single-item="item" v-on:convert="convertCad"></s-item>-->
+        </div>
 
     </div>
-
-    <!--body-->
-    <div class="row text-center">
-      <s-item v-for="item in items" v-bind:single-item="item" v-on:addItem="addToCart"></s-item>
-      <!--<s-item v-for="item in items" v-bind:single-item="item" v-on:convert="convertCad"></s-item>-->
-    </div>
-
-  </div>
 
 </template>
 
 <script>
-  import item from './item.vue'
+    import item from './item.vue'
 
-  export default {
-    methods:{
-      addToCart: function (singleItem) {
-//        console.log(singleItem);
-//        alert("index.vue: " + singleItem.num);
-        this.$emit('addToCart', singleItem);
-      },
-      convertCad:function(singleItem){
-        if(singleItem.CAD) {
-          singleItem.price = (singleItem.price * 0.9132).toFixed(2);
-          singleItem.priceSign = "USD";
-          singleItem.convertPrice = "CAD";
-        }else{
-          singleItem.price = (singleItem.price / 0.9132).toFixed(2);
-          singleItem.priceSign = "CAD";
-          singleItem.convertPrice = "USD";
+    export default {
+        methods: {
+            addToCart: function (singleItem) {
+                this.$emit('addToCart', singleItem);
+            },
+            convertCad: function (singleItem) {
+                if (singleItem.CAD) {
+                    singleItem.price = (singleItem.price * 0.9132).toFixed(2);
+                    singleItem.priceSign = "USD";
+                    singleItem.convertPrice = "CAD";
+                } else {
+                    singleItem.price = (singleItem.price / 0.9132).toFixed(2);
+                    singleItem.priceSign = "CAD";
+                    singleItem.convertPrice = "USD";
+                }
+                singleItem.CAD = !singleItem.CAD;
+            }
+        },
+        data: function () {
+            return {
+                items: [
+                    {
+                        name: 'C++ Primer Plus(第6版)',
+                        price: '99.00',
+                        description: '经典C++教程十年新版再现，众多C++高手和读者好评如潮',
+                        author: 'Stephen Prata',
+                        date: '2016',
+                        pic: '/src/assets/c++.jpg',
+                        num: 0,
+                        isSelected: true
+                    },
+                    {
+                        name: '第一行代码 Android(第2版)',
+                        price: '79.00',
+                        description: '基于Android 7.0 难点、疑点透彻讲解 通俗易懂无废话 入门到上架一本通',
+                        author: '郭霖',
+                        date: '2016',
+                        pic: '/src/assets/android.jpg',
+                        num: 0,
+                        isSelected: true
+                    },
+                    {
+                        name: '深入理解计算机系统(第3版)',
+                        price: '239.00',
+                        description: '一本将计算机软件和硬件结合讲述的经典教材',
+                        author: "Randal E. Bryant   David R. O'Hallaron",
+                        data: '2017',
+                        pic: '/src/assets/ics.jpg',
+                        num: 0,
+                        isSelected: true
+                    },
+                    {
+                        name: 'And Then There Were None',
+                        price: '70.00',
+                        description: 'One of the very best, most genuinely bewildering Christies',
+                        author: "Agatha Christie",
+                        data: '2015',
+                        pic: '/src/assets/attwn.jpg',
+                        num: 0,
+                        isSelected: true
+                    },
+                    {
+                        name: 'The Great Gatsby',
+                        price: '32.00',
+                        description: '看一颗赤子之心，在镀金时代的浮华与虚无里，如何璀璨，又如何幻灭',
+                        author: "F. Scott Fitzgerald",
+                        data: '2013',
+                        pic: '/src/assets/tgg.jpg',
+                        num: 0,
+                        isSelected: true
+                    },
+                    {
+                        name: 'Qt5开发实战',
+                        price: '99.00',
+                        description: '基于多平台框架的应用程序开发实例详解',
+                        author: "【韩】金大臣",
+                        data: '2015',
+                        pic: '/src/assets/qt.jpg',
+                        num: 0,
+                        isSelected: true
+                    },
+                    {
+                        name: 'The Great Gatsby',
+                        price: '32.00',
+                        description: '看一颗赤子之心，在镀金时代的浮华与虚无里，如何璀璨，又如何幻灭',
+                        author: "F. Scott Fitzgerald",
+                        data: '2013',
+                        pic: '/src/assets/tgg.jpg',
+                        num: 0,
+                        isSelected: true
+                    },
+                ]
+            }
+        },
+        components: {
+            's-item': item
         }
-        singleItem.CAD = !singleItem.CAD;
-      }
-    },
-    data:function(){
-      return{
-        items:[
-          {
-            name: 'C++ Primer Plus(第6版)',
-            price: '99.00',
-            description: '经典C++教程十年新版再现，众多C++高手和读者好评如潮',
-            author: 'Stephen Prata',
-            date: '2016',
-            pic: '/src/assets/c++.jpg',
-            num: 0
-          },
-          {
-            name: '第一行代码 Android(第2版)',
-            price: '79.00',
-            description: '基于Android 7.0 难点、疑点透彻讲解 通俗易懂无废话 入门到上架一本通',
-            author: '郭霖',
-            date: '2016',
-            pic: '/src/assets/android.jpg',
-            num: 0
-          },
-          {
-            name: '深入理解计算机系统(第3版)',
-            price: '239.00',
-            description: '一本将计算机软件和硬件结合讲述的经典教材',
-            author: "Randal E. Bryant   David R. O'Hallaron",
-            data: '2017',
-            pic: '/src/assets/ics.jpg',
-            num: 0
-          },
-          {
-            name: 'And Then There Were None',
-            price: '70.00',
-            description: 'One of the very best, most genuinely bewildering Christies',
-            author: "Agatha Christie",
-            data: '2015',
-            pic: '/src/assets/attwn.jpg',
-            num: 0
-          },
-          {
-            name: 'The Great Gatsby',
-            price: '32.00',
-            description: '看一颗赤子之心，在镀金时代的浮华与虚无里，如何璀璨，又如何幻灭',
-            author: "F. Scott Fitzgerald",
-            data: '2013',
-            pic: '/src/assets/tgg.jpg',
-            num: 0
-          },
-          {
-            name: 'Qt5开发实战',
-            price: '99.00',
-            description: '基于多平台框架的应用程序开发实例详解',
-            author: "【韩】金大臣",
-            data: '2015',
-            pic: '/src/assets/qt.jpg',
-            num: 0
-          },
-          {
-            name: 'The Great Gatsby',
-            price: '32.00',
-            description: '看一颗赤子之心，在镀金时代的浮华与虚无里，如何璀璨，又如何幻灭',
-            author: "F. Scott Fitzgerald",
-            data: '2013',
-            pic: '/src/assets/tgg.jpg',
-            num: 0
-          },
-        ]
-      }
-    },
-    components: {
-      's-item': item
     }
-  }
 </script>
 
 <style type="text/css" src="../assets/style/bootstrap.css"></style>
 
 <style>
-  #index {
-    text-align: center;
-  }
+    #index {
+        text-align: center;
+    }
 
 </style>
