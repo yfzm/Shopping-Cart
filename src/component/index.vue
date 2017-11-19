@@ -32,21 +32,21 @@
 
     export default {
         methods: {
-            addToCart: function (singleItem) {
-                this.$emit('addToCart', singleItem);
+            addToCart: function (singleItem, add_num) {
+                this.$emit('addToCart', singleItem, add_num);
             },
-            convertCad: function (singleItem) {
-                if (singleItem.CAD) {
-                    singleItem.price = (singleItem.price * 0.9132).toFixed(2);
-                    singleItem.priceSign = "USD";
-                    singleItem.convertPrice = "CAD";
-                } else {
-                    singleItem.price = (singleItem.price / 0.9132).toFixed(2);
-                    singleItem.priceSign = "CAD";
-                    singleItem.convertPrice = "USD";
-                }
-                singleItem.CAD = !singleItem.CAD;
-            }
+//            convertCad: function (singleItem) {
+//                if (singleItem.CAD) {
+//                    singleItem.price = (singleItem.price * 0.9132).toFixed(2);
+//                    singleItem.priceSign = "USD";
+//                    singleItem.convertPrice = "CAD";
+//                } else {
+//                    singleItem.price = (singleItem.price / 0.9132).toFixed(2);
+//                    singleItem.priceSign = "CAD";
+//                    singleItem.convertPrice = "USD";
+//                }
+//                singleItem.CAD = !singleItem.CAD;
+//            }
         },
         data: function () {
             return {

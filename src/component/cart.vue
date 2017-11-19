@@ -140,7 +140,6 @@
 
                     totalPrice += selected_books[i].num * selected_books[i].price;
                 }
-                console.log(selected_books);
                 return {
                     totalNum: selected_books.length,
                     totalPrice: totalPrice.toFixed(2)
