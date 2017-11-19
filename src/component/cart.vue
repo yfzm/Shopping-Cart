@@ -35,7 +35,7 @@
             </div>
         </div>
         <div v-if="p_show" class="cart-product container-fluid">
-            <div class="row cart-item" v-for="(item, index) in bookList">
+            <div class="row cart-item" v-for="(item, index) in bookList" v-bind:style="{'background-color': bg_color}" v-on:mouseover="chosen" v-on:mouseleave="quit">
                 <div class="col-sm-2">
                     <div class="checkbox">
                         <label for="check_item">
@@ -93,6 +93,7 @@
                 d_height: "60%",
                 d_top: "40%",
                 d_icon_path: '/src/assets/down.png',
+                bg_color: '#f8f8f8'
 //        bookList: [
 //          {
 //            name: 'C++ Primer Plus(第6版)',
@@ -159,6 +160,12 @@
             purchase: function () {
                 alert("共需付款 " + this.getTotal.totalPrice + " 元");
             },
+            chosen() {
+                this.bg_color = "#ebebeb";
+            },
+            quit() {
+                this.bg_color = "#f8f8f8";
+            },
             // 显示或隐藏
             min_max: function () {
                 if (this.p_show) {
@@ -187,8 +194,9 @@
         overflow: hidden;
         z-index: 99;
         /*border: 1px solid #c00;*/
-        background: #ebebeb;
+        /*background: #ebebeb;*/
         /*background: #F9EFFC;*/
+        background: #f8f8f8;
         width: 40%;
         /*height: 50%;*/
         font-size: 12px;
