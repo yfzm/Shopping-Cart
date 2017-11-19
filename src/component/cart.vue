@@ -8,14 +8,12 @@
                 <a class="pull-right"><img :src="this.d_icon_path" class="up-down" alt="隐藏"></a>
             </nav>
         </div>
-        <!--<div v-if="p_show" class="clearfix"></div>-->
         <div v-if="p_show" class="cart-product-title container-fluid">
             <div class="row cart-item-title">
                 <div class="col-sm-2">
                     <div class="checkbox">
                         <label for="select_all"><input type="checkbox" id="select_all" v-model="isSelectedAll">全选</label>
                     </div>
-                    <!--<div class="td-check fl"><span class="check-span fl check-all" :class="{'check-true':isSelectAll}" @click="selectProduct(isSelectAll)"></span>全选</div>-->
                 </div>
                 <div class="col-sm-2">
                     <p class="form-control-static">商品</p>
@@ -84,6 +82,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -221,10 +220,6 @@
     .cart-item-title {
         margin-top: 0
     }
-
-    /*.cart-item {*/
-        /*margin-top: 20px;*/
-    /*}*/
 
     .up-down {
         margin-top: 10px;

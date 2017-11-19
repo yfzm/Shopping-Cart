@@ -3,12 +3,14 @@
         <div class="row" v-bind:style="{'background-color': this.bg_color}" v-on:mouseover="chosen"
              v-on:mouseleave="quit">
             <div class="col-md-2">
-                <a class="pull-left" href="#"><img :src="singleItem.pic" alt="" width="150" height="150"></a>
+                <a class="pull-left" href="javascript:;"><img :src="singleItem.pic" alt="" width="150" height="150"></a>
             </div>
             <div class="col-md-2">
-                <div class="center-vertical">
-                    <p>{{ singleItem.name }}</p>
+                <div>
+                    <strong>{{ singleItem.name }}</strong>
+                    <p></p>
                     <p>作者：{{ singleItem.author }}</p>
+                    <p>出版日期：{{ singleItem.date }}</p>
                 </div>
             </div>
             <div class="col-md-3">
@@ -68,6 +70,11 @@
 
     .spacing {
         margin-top: 30px;
+    }
+
+    .hei150 {
+        height: 150px;
+        vertical-align: center;
     }
 
 </style>

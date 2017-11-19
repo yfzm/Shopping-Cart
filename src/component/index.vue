@@ -86,7 +86,7 @@
                         price: '239.00',
                         description: '一本将计算机软件和硬件结合讲述的经典教材',
                         author: "Randal E. Bryant   David R. O'Hallaron",
-                        data: '2017',
+                        date: '2017',
                         pic: '/src/assets/ics.jpg',
                         num: 0,
                         isSelected: true
@@ -96,7 +96,7 @@
                         price: '70.00',
                         description: 'One of the very best, most genuinely bewildering Christies',
                         author: "Agatha Christie",
-                        data: '2015',
+                        date: '2015',
                         pic: '/src/assets/attwn.jpg',
                         num: 0,
                         isSelected: true
@@ -106,7 +106,7 @@
                         price: '32.00',
                         description: '看一颗赤子之心，在镀金时代的浮华与虚无里，如何璀璨，又如何幻灭',
                         author: "F. Scott Fitzgerald",
-                        data: '2013',
+                        date: '2013',
                         pic: '/src/assets/tgg.jpg',
                         num: 0,
                         isSelected: true
@@ -116,7 +116,7 @@
                         price: '99.00',
                         description: '基于多平台框架的应用程序开发实例详解',
                         author: "【韩】金大臣",
-                        data: '2015',
+                        date: '2015',
                         pic: '/src/assets/qt.jpg',
                         num: 0,
                         isSelected: true
