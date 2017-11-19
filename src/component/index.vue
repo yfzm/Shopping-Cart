@@ -1,9 +1,9 @@
 <template>
     <div id="index">
         <!--head-->
-        <div class="list-head">
+        <div>
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="navbar-brand navbar-left" id="index-title">迷你书城</div>
                     <div class="navbar-text navbar-center" id="index-description">期待与你的每一次邂逅</div>
                     <form class="navbar-form navbar-right" role="search">
@@ -18,9 +18,8 @@
         </div>
 
         <!--body-->
-        <div class="text-center">
+        <div>
             <s-item v-for="item in items" v-bind:single-item="item" v-on:addItem="addToCart"></s-item>
-            <!--<s-item v-for="item in items" v-bind:single-item="item" v-on:convert="convertCad"></s-item>-->
         </div>
 
     </div>
@@ -34,19 +33,7 @@
         methods: {
             addToCart: function (singleItem, add_num) {
                 this.$emit('addToCart', singleItem, add_num);
-            },
-//            convertCad: function (singleItem) {
-//                if (singleItem.CAD) {
-//                    singleItem.price = (singleItem.price * 0.9132).toFixed(2);
-//                    singleItem.priceSign = "USD";
-//                    singleItem.convertPrice = "CAD";
-//                } else {
-//                    singleItem.price = (singleItem.price / 0.9132).toFixed(2);
-//                    singleItem.priceSign = "CAD";
-//                    singleItem.convertPrice = "USD";
-//                }
-//                singleItem.CAD = !singleItem.CAD;
-//            }
+            }
         },
         data: function () {
             return {
@@ -133,12 +120,9 @@
 <style type="text/css" src="../assets/style/bootstrap.css"></style>
 
 <style>
-    #index {
-        text-align: center;
-    }
 
     body {
-        padding-top: 70px;
+        padding-top: 100px;
     }
 
 </style>
