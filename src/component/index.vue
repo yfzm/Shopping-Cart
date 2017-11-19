@@ -1,9 +1,9 @@
 <template>
     <div id="index">
         <!--head-->
-        <div class="list-head">
+        <div>
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="navbar-brand navbar-left" id="index-title">迷你书城</div>
                     <div class="navbar-text navbar-center" id="index-description">期待与你的每一次邂逅</div>
                     <form class="navbar-form navbar-right" role="search">
