@@ -4,8 +4,8 @@
         <div class="list-head">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container-fluid">
-                    <div class="navbar-brand navbar-left">迷你书城</div>
-                    <div class="navbar-text navbar-center">期待与你的每一次邂逅</div>
+                    <div class="navbar-brand navbar-left" id="index-title">迷你书城</div>
+                    <div class="navbar-text navbar-center" id="index-description">期待与你的每一次邂逅</div>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search">
