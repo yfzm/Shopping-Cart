@@ -23,7 +23,6 @@
 
                 <div class="form-inline">
                     <input type="number" class="form-control input-sm item-num" v-model="itemNum" title="购买数量">
-                    <!--<input type="number" class="span80" value="1" title="购买数量">-->
                     <a class="btn btn-default btn-sm item-button" @click="addToCart"><i class="icon-shopping-cart"></i> 加入购物车</a>
                 </div>
 
@@ -44,11 +43,7 @@
             }
         },
         methods: {
-//            convertCad() {
-//                this.$emit('convert', this.singleItem)
-//            },
             addToCart() {
-//                this.singleItem.num = parseInt(this.itemNum);
                 this.$emit('addItem', this.singleItem, this.itemNum);
             },
             chosen() {
@@ -64,17 +59,9 @@
 <style type="text/css" src="../assets/style/bootstrap.css"></style>
 
 <style>
-    .span80 {
-        width: 80px
-    }
 
     .spacing {
         margin-top: 30px;
-    }
-
-    .hei150 {
-        height: 150px;
-        vertical-align: center;
     }
 
 </style>
