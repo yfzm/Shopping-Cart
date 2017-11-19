@@ -1,64 +1,102 @@
 <template>
-  <div class="page-shopping-cart" id="shopping-cart">
-    <div class="cart-title">
-      <h4 class="cart-title">购物车</h4>
-      <div class="mini">最小化</div>
-    </div>
-    <div class="cart-product-title clearfix">
-      <div class="td-check fl"><span class="check-span fl check-all" :class="{'check-true':isSelectAll}" @click="selectProduct(isSelectAll)"></span>全选</div>
-      <div class="td-product fl">商品</div>
-      <div class="td-num fl">数量</div>
-      <div class="td-price fl">单价(元)</div>
-      <div class="td-total fl">金额(元)</div>
-      <div class="td-do fl">操作</div>
-    </div>
-    <div class="cart-product clearfix">
-      <table>
-        <tbody>
-        <!--遍历的时候带上索引-->
-        <tr v-for="(item, index) in bookList">
-          <td class="td-check"><span class="check-span" @click="item.select=!item.select" :class="{'check-true':item.select}"></span></td>
-          <td class="td-product"><img :src="item.pic" width="50" height="50">
-            <div class="product-info">
-              <h6>{{item.name}}</h6>
-              <p>{{item.description}}</p>
-              <p>作者:{{item.author}}&nbsp;&nbsp;出版日期：{{item.date}}</p>
+    <div class="page-shopping-cart" id="shopping-cart" title="点我显示/隐藏购物车" v-bind:style="{ height: d_height, top: d_top}">
+        <div @click="min_max">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid"></div>
+                <div class="navbar-brand"><img class="pull-left" src="../assets/cart.png" alt="" width="20" height="20">&nbsp;&nbsp;购物车
+                </div>
+                <a class="pull-right"><img :src="this.d_icon_path" class="up-down" alt="隐藏"></a>
+            </nav>
+        </div>
+        <div v-if="p_show" class="cart-product-title container-fluid">
+            <div class="row cart-item-title">
+                <div class="col-sm-2">
+                    <div class="checkbox">
+                        <label for="select_all"><input type="checkbox" id="select_all" v-model="isSelectedAll">全选</label>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <p class="form-control-static">商品</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="form-control-static">单价(元)</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="form-control-static">数量</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="form-control-static">金额(元)</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="form-control-static">操作</p>
+                </div>
             </div>
-            <div class="clearfix"></div>
-          </td>
-          <td class="td-num">
-            <div class="product-num">
-              <a href="javascript:;" class="num-reduce num-do fl" @click="item.pro_num>0?item.pro_num--:''"><span></span></a>
-              <input type="text" class="num-input" v-model="item.pro_num">
-              <a href="javascript:;" class="num-add num-do fr" @click="item.num++"><span></span></a>
+        </div>
+        <div v-if="p_show" class="cart-product">
+            <div class="cart-item container-fluid" v-for="(item, index) in bookList">
+                <div class="row" v-bind:style="{ 'background-color': (index === d_index) ? '#ebebeb' : '#f8f8f8' }" v-on:mouseover="chosen(index)" v-on:mouseleave="quit">
+                    <div class="col-sm-2">
+                        <div class="checkbox">
+                            <label for="check_item">
+                                <input type="checkbox" id="check_item" v-model="item.isSelected">
+                                <a class="td-product"><img :src="item.pic" width="50" height="50"></a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="form-control-static">{{ item.name }}</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="form-control-static">{{ item.price }}</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="num"><input id="num" class="form-control input-sm" type="number" title="num"
+                                                v-model="item.num"></label>
+                        <!--<div class="td-num">{{ item.num }}</div>-->
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="form-control-static">{{ (item.num * item.price).toFixed(2) }}</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="javascript:;" class="btn btn-warning btn-sm " @click="deleteOneProduct(index)"
+                           role='button'>删除</a>
+                    </div>
+                </div>
+
+                <!--<div class="cart-spacing"></div>-->
             </div>
-          </td>
-          <td class="td-price">
-            <p class="red-text">￥<span class="price-text">{{item.price}}</span></p>
-          </td>
-          <td class="td-total">
-            <p class="red-text">￥<span class="total-text">{{item.price*item.num}}</span>.00</p>
-          </td>
-          <td class="td-do"><a href="javascript:;" class="product-delect" @click="deleteOneProduct(index)">删除</a></td>
-        </tr>
-        </tbody>
-      </table>
+
+        </div>
+        <div v-if="p_show" class="cart-product-info">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a class="btn btn-danger btn-sm" href="javascript:;" @click="deleteProducts()" role="button">删除所选商品</a>
+                    </div>
+                    <div class="col-md-6 col-md-offset-1">
+                        <p class="form-control-static"><span class="total-num">{{ getTotal.totalNum }}</span>&nbsp;&nbsp;&nbsp;种商品总计（不含运费）：<span class="lead total-price">￥&nbsp;{{ getTotal.totalPrice }}</span></p>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-success" href="javascript:;" role="button" @click="purchase">去结算</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="cart-product-info">
-      <a class="delect-product" href="javascript:;" @click="deleteProduct"><span></span>删除所选商品</a>
-      <a class="keep-shopping" href="#"><span></span>继续购物</a>
-      <a class="btn-buy fr" href="javascript:;">去结算</a>
-      <p class="fr product-total">￥<span>{{getTotal.totalPrice}}</span></p>
-      <p class="fr check-num"><span>{{getTotal.totalNum}}</span>件商品总计（不含运费）：</p>
-    </div>
-  </div>
 </template>
 
 <script>
-  export default {
-    props: ['bookList'],
-//    data: function() {
-//      return {
+    export default {
+        props: ['bookList'],
+        data: function () {
+            return {
+                p_show: true,
+                d_height: "60%",
+                d_top: "40%",
+                d_icon_path: '/src/assets/down.png',
+                d_index: {},
+                bg_color: '#f8f8f8'
 //        bookList: [
 //          {
 //            name: 'C++ Primer Plus(第6版)',
@@ -67,78 +105,137 @@
 //            author: 'Stephen Prata',
 //            date: '2016',
 //            pic: '',
-//            num: 1
+//            num: 1,
+//            isSelected: true
 //          }
 //        ]
-//      }
-//    },
-    computed: {
-      //检测是否全选
-      isSelectAll:function(){
-        //如果productList中每一条数据的select都为true，返回true，否则返回false;
-        return this.bookList.every(function (val) { return val.select});
-      },
-      //获取总价和产品总件数
-      getTotal:function(){
-        //获取productList中select为true的数据。
-        var _proList=this.bookList.filter(function (val) { return val.select}),totalPrice=0;
-        for(var i=0,len=_proList.length;i<len;i++){
-          //总价累加
-          totalPrice+=_proList[i].pro_num*_proList[i].pro_price;
-        }
-        //选择产品的件数就是_proList.length，总价就是totalPrice
-        return {totalNum:_proList.length,totalPrice:totalPrice}
-      }
-    },
-    methods: {
-      //全选与取消全选
-      selectProduct:function(_isSelect){
-        //遍历productList，全部取反
-        for (var i = 0, len = this.bookList.length; i < len; i++) {
-          this.bookList[i].select = !_isSelect;
-        }
-      },
-      //删除已经选中(select=true)的产品
-      deleteProduct:function () {
-        this.bookList=this.bookList.filter(function (item) {return !item.select})
-      },
-      //删除单条产品
-      deleteOneProduct:function (index) {
-        //根据索引删除productList的记录
-        this.bookList.splice(index,1);
-      },
-    },
-    mounted: function () {
-      var _this=this;
-      //为productList添加select（是否选中）字段，初始值为true
-      this.bookList.map(function (item) {
-        _this.$set(item, 'select', true);
-      })
-    }
+            }
+        },
+        computed: {
+            //检测是否全选
+            isSelectedAll: {
+                get: function () {
+                    //如果productList中每一条数据的select都为true，返回true，否则返回false;
+                    for (let i = 0, len = this.bookList.length; i < len; i++) {
+                        if (!this.bookList[i].isSelected) {
+                            return false;
+                        }
+                    }
+                    return true;
+                },
+                set: function (pSelected) {
+                    for (let i = 0, len = this.bookList.length; i < len; i++) {
+                        this.bookList[i].isSelected = pSelected;
+                    }
+                }
+            },
+            //获取总价和产品总件数
+            getTotal: function () {
+//                alert("getTotal");
+                let selected_books = this.bookList.filter(function (val) {
+                    return val.isSelected
+                });
+                let totalPrice = 0;
+                for (let i = 0, len = selected_books.length; i < len; i++) {
 
-  }
+                    totalPrice += selected_books[i].num * selected_books[i].price;
+                }
+                console.log(selected_books);
+                return {
+                    totalNum: selected_books.length,
+                    totalPrice: totalPrice.toFixed(2)
+                }
+            }
+        },
+        methods: {
+            // 删除已经选中(isSelected=true)的产品
+            deleteProducts: function () {
+                console.log(this.bookList);
+                // 子模块中不允许修改props，故使用emit移交父模块处理
+                this.$emit('update');
+            },
+            // 删除单条产品
+            deleteOneProduct: function (index) {
+                //根据索引删除productList的记录
+                this.bookList.splice(index, 1);
+            },
+            // 付款
+            purchase: function () {
+                alert("共需付款 " + this.getTotal.totalPrice + " 元");
+            },
+            chosen(index) {
+                this.d_index = index;
+            },
+            quit() {
+                this.d_index = undefined;
+            },
+            // 显示或隐藏
+            min_max: function () {
+                if (this.p_show) {
+                    this.p_show = !this.p_show;
+                    this.d_height = "8%";
+                    this.d_top = "92%";
+                    this.d_icon_path = '/src/assets/up.png'
+
+                } else {
+                    this.p_show = !this.p_show;
+                    this.d_height = "60%";
+                    this.d_top = "40%";
+                    this.d_icon_path = '/src/assets/down.png'
+                }
+            }
+        }
+    }
 </script>
 
+<style type="text/css" resource="/src/assets/style/bootstrap.css"></style>
+
 <style>
-  #shopping-cart {
-    position: fixed;
-    right: 0;
-    overflow: hidden;
-    z-index: 99;
-    border: 1px solid #c00;
-    background: #F9EFFC;
-    width: 40%;
-    height: 50%;
-    font-size: 12px;
-    margin: 0;
-    display: block;
-    top: 50%;
-    visibility: visible;
-    opacity: 1;
-  }
-  .cart-product {
-    width: 100%;
-    height: 80%;
-    overflow: scroll;
-  }
+    #shopping-cart {
+        position: fixed;
+        right: 0;
+        overflow: hidden;
+        z-index: 99;
+        /*border: 1px solid #c00;*/
+        /*background: #ebebeb;*/
+        /*background: #F9EFFC;*/
+        background: #f8f8f8;
+        width: 40%;
+        /*height: 50%;*/
+        font-size: 12px;
+        margin: 0;
+        display: block;
+        /*top: 50%;*/
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .cart-product {
+        width: 100%;
+        height: 65%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .cart-item-title {
+        margin-top: 0
+    }
+
+    .up-down {
+        margin-top: 10px;
+        margin-right: 30px;
+        width: 25px;
+        height: 25px;
+    }
+
+    .total-price {
+        font: bold 20px 'impact';
+    }
+
+    .total-num {
+        font: italic 13px 'impact';
+    }
+
 </style>
+
+
