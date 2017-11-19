@@ -120,12 +120,9 @@
 <style type="text/css" src="../assets/style/bootstrap.css"></style>
 
 <style>
-    #index {
-        /*text-align: center;*/
-    }
 
     body {
-        padding-top: 70px;
+        padding-top: 100px;
     }
 
 </style>

@@ -3,7 +3,7 @@
         <div class="row" v-bind:style="{'background-color': this.bg_color}" v-on:mouseover="chosen"
              v-on:mouseleave="quit">
             <div class="col-md-2">
-                <a class="pull-left" href="javascript:;"><img :src="singleItem.pic" alt="" width="150" height="150"></a>
+                <a class="pull-left" href="javascript:;"><img :src="singleItem.pic" alt="" width="120" height="120"></a>
             </div>
             <div class="col-md-2">
                 <div>
@@ -17,7 +17,7 @@
                 <p class="item-description">{{ singleItem.description }}</p>
             </div>
             <div class="col-md-1">
-                <p class="item-price">{{ singleItem.price }}</p>
+                <p class="item-price">￥{{ singleItem.price }}</p>
             </div>
             <div class="col-md-4">
 
@@ -61,6 +61,19 @@
 
     .spacing {
         margin-top: 30px;
+    }
+
+    .item-price {
+        color: #ff4500;
+        font-size: 15px;
+    }
+
+    .item-author, .item-date {
+        color: #808080
+    }
+
+    .item-description {
+        color: #606060
     }
 
 </style>
