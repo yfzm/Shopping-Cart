@@ -27,7 +27,8 @@
             }
         },
         methods: {
-            addToCart: function (singleItem) {
+            addToCart: function (singleItem, add_num) {
+                singleItem.num = add_num;
                 let hasIt = false;
                 this.cartItems.map(item => {
                     if (item.name === singleItem.name) {
