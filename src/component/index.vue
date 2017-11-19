@@ -4,8 +4,8 @@
         <div class="list-head">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container-fluid">
-                    <div class="navbar-brand navbar-left">迷你书城</div>
-                    <div class="navbar-text navbar-center">期待与你的每一次邂逅</div>
+                    <div class="navbar-brand navbar-left" id="index-title">迷你书城</div>
+                    <div class="navbar-text navbar-center" id="index-description">期待与你的每一次邂逅</div>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search">
@@ -32,21 +32,21 @@
 
     export default {
         methods: {
-            addToCart: function (singleItem) {
-                this.$emit('addToCart', singleItem);
+            addToCart: function (singleItem, add_num) {
+                this.$emit('addToCart', singleItem, add_num);
             },
-            convertCad: function (singleItem) {
-                if (singleItem.CAD) {
-                    singleItem.price = (singleItem.price * 0.9132).toFixed(2);
-                    singleItem.priceSign = "USD";
-                    singleItem.convertPrice = "CAD";
-                } else {
-                    singleItem.price = (singleItem.price / 0.9132).toFixed(2);
-                    singleItem.priceSign = "CAD";
-                    singleItem.convertPrice = "USD";
-                }
-                singleItem.CAD = !singleItem.CAD;
-            }
+//            convertCad: function (singleItem) {
+//                if (singleItem.CAD) {
+//                    singleItem.price = (singleItem.price * 0.9132).toFixed(2);
+//                    singleItem.priceSign = "USD";
+//                    singleItem.convertPrice = "CAD";
+//                } else {
+//                    singleItem.price = (singleItem.price / 0.9132).toFixed(2);
+//                    singleItem.priceSign = "CAD";
+//                    singleItem.convertPrice = "USD";
+//                }
+//                singleItem.CAD = !singleItem.CAD;
+//            }
         },
         data: function () {
             return {

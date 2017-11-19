@@ -1,8 +1,14 @@
-# IDE - WebStorm
+# IDE
 .idea/
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
 
 # dependencies
 node_modules/
 
 # output files
 dist/
+/test/unit/coverage/

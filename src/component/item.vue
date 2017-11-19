@@ -9,22 +9,22 @@
                 <div>
                     <strong>{{ singleItem.name }}</strong>
                     <p></p>
-                    <p>作者：{{ singleItem.author }}</p>
-                    <p>出版日期：{{ singleItem.date }}</p>
+                    <p class="item-author">作者：{{ singleItem.author }}</p>
+                    <p class="item-date">出版日期：{{ singleItem.date }}</p>
                 </div>
             </div>
             <div class="col-md-3">
-                <p>{{ singleItem.description }} </p>
+                <p class="item-description">{{ singleItem.description }}</p>
             </div>
             <div class="col-md-1">
-                <p>{{ singleItem.price }}</p>
+                <p class="item-price">{{ singleItem.price }}</p>
             </div>
             <div class="col-md-4">
 
                 <div class="form-inline">
-                    <input type="number" class="form-control input-sm" v-model="itemNum" title="购买数量">
+                    <input type="number" class="form-control input-sm item-num" v-model="itemNum" title="购买数量">
                     <!--<input type="number" class="span80" value="1" title="购买数量">-->
-                    <a class="btn btn-default btn-sm" @click="addToCart"><i class="icon-shopping-cart"></i> 加入购物车</a>
+                    <a class="btn btn-default btn-sm item-button" @click="addToCart"><i class="icon-shopping-cart"></i> 加入购物车</a>
                 </div>
 
             </div>
@@ -44,12 +44,12 @@
             }
         },
         methods: {
-            convertCad() {
-                this.$emit('convert', this.singleItem)
-            },
+//            convertCad() {
+//                this.$emit('convert', this.singleItem)
+//            },
             addToCart() {
-                this.singleItem.num = parseInt(this.itemNum);
-                this.$emit('addItem', this.singleItem);
+//                this.singleItem.num = parseInt(this.itemNum);
+                this.$emit('addItem', this.singleItem, this.itemNum);
             },
             chosen() {
                 this.bg_color = "#ebebeb";
