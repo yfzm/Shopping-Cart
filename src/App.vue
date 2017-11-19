@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <page @addToCart="addToCart"></page>
-        <cart v-bind:bookList="cartItems"></cart>
+        <cart v-bind:bookList="cartItems" v-on:update="update()"></cart>
     </div>
 </template>
 
@@ -40,6 +40,9 @@
                     this.cartItems.push(JSON.parse(JSON.stringify(singleItem)));
 //          this.cartItems.push(singleItem);
                 }
+            },
+            update: function () {
+                this.cartItems = this.cartItems.filter((item) => !item.isSelected);
             }
         },
         components: {

@@ -13,7 +13,7 @@
             <div class="row cart-item-title">
                 <div class="col-sm-2">
                     <div class="checkbox">
-                        <label for="select_all"><input type="checkbox" id="select_all">全选</label>
+                        <label for="select_all"><input type="checkbox" id="select_all" v-model="isSelectedAll">全选</label>
                     </div>
                     <!--<div class="td-check fl"><span class="check-span fl check-all" :class="{'check-true':isSelectAll}" @click="selectProduct(isSelectAll)"></span>全选</div>-->
                 </div>
@@ -67,10 +67,22 @@
 
         </div>
         <div v-if="p_show" class="cart-product-info">
-            <a class="btn btn-danger btn-sm" href="javascript:;" @click="deleteProduct" role="button"><span></span>删除所选商品</a>
-            <p class="form-control-static"><span>{{getTotal.totalNum}}</span>件商品总计（不含运费）：</p>
-            <p class="form-control-static">￥<span>{{getTotal.totalPrice}}</span></p>
-            <a class="btn btn-success" href="javascript:;" role="button">去结算</a>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a class="btn btn-danger btn-sm" href="javascript:;" @click="deleteProducts()" role="button">删除所选商品</a>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="form-control-static"><span>0件商品总计（不含运费）：</span></p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="form-control-static">￥<span>0</span></p>
+                    </div>
+                    <div class="col-md-3">
+                        <a class="btn btn-success" href="javascript:;" role="button">去结算</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -81,8 +93,8 @@
         data: function () {
             return {
                 p_show: true,
-                d_height: "50%",
-                d_top: "50%",
+                d_height: "60%",
+                d_top: "40%",
                 d_icon_path: '/src/assets/down.png'
 //        bookList: [
 //          {
@@ -100,11 +112,21 @@
         },
         computed: {
             //检测是否全选
-            isSelectAll: function () {
-                //如果productList中每一条数据的select都为true，返回true，否则返回false;
-                return this.bookList.every(function (val) {
-                    return val.select
-                });
+            isSelectedAll: {
+                get: function () {
+                    //如果productList中每一条数据的select都为true，返回true，否则返回false;
+                    for (let i = 0, len = this.bookList.length; i < len; i++) {
+                        if (!this.bookList[i].isSelected) {
+                            return false;
+                        }
+                    }
+                    return true;
+                },
+                set: function (pSelected) {
+                    for (let i = 0, len = this.bookList.length; i < len; i++) {
+                        this.bookList[i].isSelected = pSelected;
+                    }
+                }
             },
             //获取总价和产品总件数
             getTotal: function () {
@@ -121,24 +143,18 @@
             }
         },
         methods: {
-            //全选与取消全选
-            selectProduct: function (_isSelect) {
-                //遍历productList，全部取反
-                for (var i = 0, len = this.bookList.length; i < len; i++) {
-                    this.bookList[i].select = !_isSelect;
-                }
+            // 删除已经选中(isSelected=true)的产品
+            deleteProducts: function () {
+                console.log(this.bookList);
+                // 子模块中不允许修改props，故使用emit移交父模块处理
+                this.$emit('update');
             },
-            //删除已经选中(select=true)的产品
-            deleteProduct: function () {
-                this.bookList = this.bookList.filter(function (item) {
-                    return !item.select
-                })
-            },
-            //删除单条产品
+            // 删除单条产品
             deleteOneProduct: function (index) {
                 //根据索引删除productList的记录
                 this.bookList.splice(index, 1);
             },
+            // 显示或隐藏
             min_max: function () {
                 if (this.p_show) {
                     this.p_show = !this.p_show;
@@ -148,20 +164,12 @@
 
                 } else {
                     this.p_show = !this.p_show;
-                    this.d_height = "50%";
-                    this.d_top = "50%";
+                    this.d_height = "60%";
+                    this.d_top = "40%";
                     this.d_icon_path = '/src/assets/down.png'
                 }
             }
-        },
-//        mounted: function () {
-//            var _this = this;
-//            //为productList添加select（是否选中）字段，初始值为true
-//            this.bookList.map(function (item) {
-//                _this.$set(item, 'select', true);
-//            })
-//        }
-
+        }
     }
 </script>
 
