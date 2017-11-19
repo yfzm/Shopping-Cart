@@ -2,10 +2,10 @@
     <div id="index">
         <!--head-->
         <div class="list-head">
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container-fluid">
-                    <div class="navbar-brand navbar-left">书城</div>
-                    <div class="navbar-text navbar-center">在这里找到好书</div>
+                    <div class="navbar-brand navbar-left">迷你书城</div>
+                    <div class="navbar-text navbar-center">期待与你的每一次邂逅</div>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search">
@@ -135,6 +135,10 @@
 <style>
     #index {
         text-align: center;
+    }
+
+    body {
+        padding-top: 70px;
     }
 
 </style>

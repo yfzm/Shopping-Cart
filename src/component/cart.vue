@@ -72,13 +72,10 @@
                     <div class="col-md-3">
                         <a class="btn btn-danger btn-sm" href="javascript:;" @click="deleteProducts()" role="button">删除所选商品</a>
                     </div>
-                    <div class="col-md-3">
-                        <p class="form-control-static"><span>0件商品总计（不含运费）：</span></p>
+                    <div class="col-md-6 col-md-offset-1">
+                        <p class="form-control-static"><span class="total-num">{{ getTotal.totalNum }}</span>&nbsp;&nbsp;&nbsp;种商品总计（不含运费）：￥&nbsp;<span class="lead total-price">{{ getTotal.totalPrice }}</span></p>
                     </div>
-                    <div class="col-md-3">
-                        <p class="form-control-static">￥<span>0</span></p>
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <a class="btn btn-success" href="javascript:;" role="button">去结算</a>
                     </div>
                 </div>
@@ -95,7 +92,7 @@
                 p_show: true,
                 d_height: "60%",
                 d_top: "40%",
-                d_icon_path: '/src/assets/down.png'
+                d_icon_path: '/src/assets/down.png',
 //        bookList: [
 //          {
 //            name: 'C++ Primer Plus(第6版)',
@@ -130,16 +127,20 @@
             },
             //获取总价和产品总件数
             getTotal: function () {
-                //获取productList中select为true的数据。
-                var _proList = this.bookList.filter(function (val) {
-                    return val.select
-                }), totalPrice = 0;
-                for (var i = 0, len = _proList.length; i < len; i++) {
-                    //总价累加
-                    totalPrice += _proList[i].pro_num * _proList[i].pro_price;
+//                alert("getTotal");
+                let selected_books = this.bookList.filter(function (val) {
+                    return val.isSelected
+                });
+                let totalPrice = 0;
+                for (let i = 0, len = selected_books.length; i < len; i++) {
+
+                    totalPrice += selected_books[i].num * selected_books[i].price;
                 }
-                //选择产品的件数就是_proList.length，总价就是totalPrice
-                return {totalNum: _proList.length, totalPrice: totalPrice}
+                console.log(selected_books);
+                return {
+                    totalNum: selected_books.length,
+                    totalPrice: totalPrice.toFixed(2)
+                }
             }
         },
         methods: {
@@ -213,6 +214,14 @@
         margin-right: 30px;
         width: 25px;
         height: 25px;
+    }
+
+    .total-price {
+        font: bold 20px 'impact';
+    }
+
+    .total-num {
+        font: italic 13px 'impact';
     }
 
 </style>
