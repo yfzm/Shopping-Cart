@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-sm-2">
                         <label for="num"><input id="num" class="form-control input-sm" type="number" title="num"
-                                                min="0" max="1000" step="1"
+                                                min="1" max="1000" step="1"
                                                 onkeyup="this.value=this.value.replace(/\D/g,'')"
                                                 onafterpaste="this.value=this.value.replace(/\D/g,'')"
                                                 v-model="item.num"></label>

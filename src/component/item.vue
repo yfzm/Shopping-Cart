@@ -22,7 +22,7 @@
             <div class="col-md-4">
 
                 <div class="form-inline">
-                    <input type="number" min="0" step="1"
+                    <input type="number" min="1" max="1000" step="1"
                            onkeyup="this.value=this.value.replace(/\D/g,'')"
                            onafterpaste="this.value=this.value.replace(/\D/g,'')"
                            class="form-control input-sm item-num" v-model="itemNum" title="购买数量">
