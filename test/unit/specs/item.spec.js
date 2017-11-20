@@ -60,7 +60,7 @@ describe('item.vue', () => {
         }).$el;
         expect(ele.querySelector("strong").innerText).to.be.equal('罪与罚');
         expect(ele.querySelector(".item-author").innerText).to.be.equal('作者：【俄】费奥多尔·陀思妥耶夫斯基');
-        expect(ele.querySelector(".item-price").innerText).to.be.equal('18.10');
+        expect(ele.querySelector(".item-price").innerText).to.be.equal('￥18.10');
         expect(ele.querySelector(".item-description").innerText).to.be.equal('一部浸透着血和泪的社会悲剧，一部酣畅淋漓地剖析一个罪犯内心世界的心理小说，一部举世公认的、震撼灵魂的世界文学名著。');
         expect(ele.querySelector(".item-date").innerText).to.be.equal('出版日期：2003');
     });
